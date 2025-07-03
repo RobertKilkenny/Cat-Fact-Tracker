@@ -17,17 +17,21 @@ const AllFactsPage = () => {
       try {
         const response = await fetch("http://localhost:8000/catfacts/");
         if (!response.ok) throw new Error("Failed to fetch all cat facts");
-        const data: CatFactObj[] = await response.json();
+        const data = await response.json() as CatFactObj[];
         setData(data);
       } catch (err) {
-        setError("Unable to load cat fact. Try again.");
+        if (err instanceof Error) {
+          setError(`Unable to load cat fact. Try again.\nError: ${err.message}`);
+        } else {
+          setError("Unable to load cat fact. Try again.\nUnknown error.");
+        }
       } finally {
         setLoading(false);
       }
     };
   
     useEffect(() => {
-      fetchRandomFact();
+      fetchRandomFact().catch(() => {});
     }, []);
   
     return (

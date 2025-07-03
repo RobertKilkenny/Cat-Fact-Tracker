@@ -1,10 +1,18 @@
 import { useState } from "react";
 
+type SuccessResponse = { message: string, detail: null};
+type ErrorResponse = { detail: string, message: null };
+
 const NewFactsPage = () => {
-  const [fact, setFact] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [fact, setFact] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
+
+  // Added to avoid @typescript-eslint/no-misused-promises issue
+  const onSubmit = (e: React.FormEvent) => {
+    void handleSubmit(e);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +33,7 @@ const NewFactsPage = () => {
         body: new URLSearchParams({ fact }),
       });
 
-      const data = await response.json();
+      const data = await response.json() as SuccessResponse | ErrorResponse;
 
       if (!response.ok) {
         throw new Error(data.detail || "Failed to submit fact");
@@ -33,8 +41,12 @@ const NewFactsPage = () => {
 
       setSuccessMsg(data.message || "Fact submitted successfully!");
       setFact("");
-    } catch (err: any) {
-      setError(err.message || "An error occurred.");
+    } catch (err) {
+        if (err instanceof Error) {
+          setError(`Unable to save cat fact. Try again.\nError: ${err.message}`);
+        } else {
+          setError("Unable to save cat fact. Try again.\nUnknown error.");
+        }
     } finally {
       setLoading(false);
     }
@@ -43,10 +55,10 @@ const NewFactsPage = () => {
   return (
     <div>
       <h3>Submit a New Cat Fact</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <textarea
           value={fact}
-          onChange={(e) => setFact(e.target.value)}
+          onChange={(e) => { setFact(e.target.value); }}
           rows={4}
           cols={50}
           placeholder="Enter your cat fact here..."
