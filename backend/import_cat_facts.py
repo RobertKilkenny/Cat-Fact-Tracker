@@ -28,4 +28,4 @@ def fetch_and_store_facts(n=5):
             insert_fact(fact)
 
 if __name__ == "__main__":
-    fetch_and_store_facts(100)
+    fetch_and_store_facts(5)
