@@ -3,7 +3,7 @@ import sqlite3
 from fastapi import FastAPI, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from db import DB_PATH
+from backend.db import DB_PATH
 
 app = FastAPI()
 
