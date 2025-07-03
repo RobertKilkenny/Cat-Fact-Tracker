@@ -23,12 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
-# Compiled Python bytecode
+# Backend cleaning
 *.pyc
 __pycache__/
-
-# Virtual environments
 venv/
+/backend/cat_facts.db
 
 # Environment-specific settings
 .env
