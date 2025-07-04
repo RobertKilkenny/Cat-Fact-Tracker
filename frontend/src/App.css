@@ -53,6 +53,12 @@ main {
     background-color: white;
 }
 
+ul { 
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
 form {
     display: flex;
     flex-direction: column;
