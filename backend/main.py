@@ -100,7 +100,7 @@ def create_catfact(fact: str = Form(...)):
         conn.commit()
     except sqlite3.IntegrityError:
         conn.close()
-        return {"message": "Duplicate fact, not inserted."}
+        return {"message": "Duplicate fact, not inserted.", "success": False}
 
     conn.close()
-    return {"message": "Fact inserted successfully."}
+    return {"message": "Fact inserted successfully.", "success": True}

@@ -9,7 +9,7 @@ const App = () => {
     <Router>
       <div className="page-container">
         <nav>
-            <h1>Cat Facts</h1>
+            <span><img src='/paw.svg' /><h1>Cat Facts</h1></span>
             <Link to="/">Home</Link>
             <Link to="/facts">All Facts</Link>
             <Link to="/new">Add Fact</Link>

@@ -44,6 +44,17 @@ nav a:active {
     color: black;
 }
 
+nav span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav img {
+    width: 75px;
+    color: black;
+}
+
 main {
     display: flex;
     flex-direction: column;

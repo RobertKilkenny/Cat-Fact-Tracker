@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-type SuccessResponse = { message: string, detail: null};
-type ErrorResponse = { detail: string, message: null };
+type SuccessResponse = { message: string, detail: null, success: boolean};
+type ErrorResponse = { detail: string, message: null, success: false };
 
 const NewFactsPage = () => {
   const [fact, setFact] = useState<string>("");
@@ -27,6 +27,7 @@ const NewFactsPage = () => {
     }
 
     try {
+        // Connect to FastAPI using localhost:8000 for demo (see `backend/main.py` for all API calls)
       const response = await fetch("http://localhost:8000/catfacts", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -39,7 +40,12 @@ const NewFactsPage = () => {
         throw new Error(data.detail || "Failed to submit fact");
       }
 
-      setSuccessMsg(data.message || "Fact submitted successfully!");
+      if(data.success) {
+        setSuccessMsg(data.message || "Fact submitted successfully!");
+      } else {
+        setError(data.message || "Fact was a duplicate!");
+      }
+
       setFact("");
     } catch (err) {
         if (err instanceof Error) {
