@@ -44,6 +44,16 @@ nav a:active {
     color: black;
 }
 
+nav span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav img {
+    width: 75px;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -122,6 +132,10 @@ footer {
     nav a {
         font-weight: 300;
         font-size: 15px;
+    }
+
+    nav img {
+        width: 30px;
     }
 
     h1 {

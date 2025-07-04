@@ -9,8 +9,11 @@ const HomePage = () => {
     setLoading(true);
     setError(null);
     try {
+        // Connect to FastAPI using localhost:8000 for demo (see `backend/main.py` for all API calls)
       const response = await fetch("http://localhost:8000/catfacts/random");
       if (!response.ok) throw new Error("Failed to fetch random fact");
+
+      // response, if not an error, will be in this shape
       const data = await response.json() as {"fact": string};
       setFact(data.fact);
     }catch (err) {
@@ -43,8 +46,8 @@ const HomePage = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       {fact && (
         <div>
-          <p style={{ fontSize: "1.2rem" }}>{fact}</p>
-          <button onClick={handleClick} style={{ marginTop: "1rem" }}>
+          <p>{fact}</p>
+          <button onClick={handleClick}>
             🔁 Get Another Fact
           </button>
         </div>

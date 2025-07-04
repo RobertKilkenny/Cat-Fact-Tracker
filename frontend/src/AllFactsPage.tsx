@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Data shape expected for API call
 interface CatFactObj{
     id: number
     fact: string
@@ -11,10 +12,11 @@ const AllFactsPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
   
-    const fetchRandomFact = async () => {
+    const fetchFacts = async () => {
       setLoading(true);
       setError(null);
       try {
+        // Connect to FastAPI using localhost:8000 for demo (see `backend/main.py` for all API calls)
         const response = await fetch("http://localhost:8000/catfacts/");
         if (!response.ok) throw new Error("Failed to fetch all cat facts");
         const data = await response.json() as CatFactObj[];
@@ -30,20 +32,22 @@ const AllFactsPage = () => {
       }
     };
   
+    
     useEffect(() => {
-      fetchRandomFact().catch(() => {});
+      fetchFacts().catch(() => {});
     }, []);
   
     return (
       <div className="page-content">
         {loading && <h2>Loading...</h2>}
         {error && <p style={{ color: "red" }}>{error}</p>}
-        {data && (
+        { // When the data loads, display it as a simple list with all of the fact (Not showing date saved to database currently)
+        data && (
             <div>
               <h3>Here Are All Cat Facts We Have Stored:</h3>
                 <ul>
-                  {data.map((obj, index) => (
-                          <li key={index}>{obj.fact}</li>
+                  {data.map((obj) => (
+                          <li key={obj.id}>{obj.fact}</li>
                       ))
                   }
               </ul>
