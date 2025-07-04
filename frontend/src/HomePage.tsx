@@ -37,7 +37,7 @@ const HomePage = () => {
 
   
   return (
-    <div>
+    <div className="page-content">
       <h3>Here is a Random Cat Fact:</h3>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}

@@ -53,7 +53,7 @@ const NewFactsPage = () => {
   };
 
   return (
-    <div>
+    <div className="page-content">
       <h3>Submit a New Cat Fact</h3>
       <form onSubmit={onSubmit}>
         <textarea
