@@ -2,18 +2,17 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./HomePage";
 import AllFactsPage from "./AllFactsPage";
 import NewFactPage from "./NewFactPage";
+import "./App.css";
 
 const App = () => {
   return (
     <Router>
-      <div>
+      <div className="page-container">
         <nav>
             <h1>Cat Facts</h1>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/facts">All Facts</Link></li>
-            <li><Link to="/new">Add Fact</Link></li>
-          </ul>
+            <Link to="/">Home</Link>
+            <Link to="/facts">All Facts</Link>
+            <Link to="/new">Add Fact</Link>
         </nav>
 
         <main>
@@ -23,6 +22,7 @@ const App = () => {
             <Route path="/new" element={<NewFactPage />} />
           </Routes>
         </main>
+        <footer><p>All facts are pulled from the website <a href="https://catfact.ninja/fact">catfact.ninja</a></p></footer>
       </div>
     </Router>
   );

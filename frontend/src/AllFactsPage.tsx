@@ -35,15 +35,15 @@ const AllFactsPage = () => {
     }, []);
   
     return (
-      <div>
+      <div className="page-content">
         {loading && <h2>Loading...</h2>}
         {error && <p style={{ color: "red" }}>{error}</p>}
         {data && (
             <div>
               <h3>Here Are All Cat Facts We Have Stored:</h3>
                 <ul>
-                  {data.map((obj) => (
-                          <li>{obj.fact}</li>
+                  {data.map((obj, index) => (
+                          <li key={index}>{obj.fact}</li>
                       ))
                   }
               </ul>
